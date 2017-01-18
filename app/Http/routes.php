@@ -14,3 +14,26 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::resource('api', 'APIController');
+
+Route::group([ 'prefix' => 'api', 'as' => 'api.', ], function () {
+    Route::get('index', [
+        'as'   => 'index',
+        'uses' => 'APIController@index',
+    ]);
+
+    Route::post('authenticate', [
+        'as'   => 'authenticate',
+        'uses' => 'APIController@authenticate',
+    ]);
+
+    Route::get('headers', [
+        'as'   => 'headers',
+        'uses' => 'APIController@getHeaders',
+    ]);
+});
+
+/*Route::group([ 'middleware' => [ 'cors', 'jwt-auth' ] ], function () {
+
+});*/
